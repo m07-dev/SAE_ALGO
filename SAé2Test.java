@@ -99,4 +99,29 @@ public class SAé2Test {
         int[] tabNeg = {-20, -10, 0, 10};
         assertEquals(-10, SAé2.rechercheDichoPlusProche(tabNeg, -12), "Doit fonctionner avec des valeurs négatives.");
     }
+    @Test
+    void testRechercheDicho() {
+        // creation d'un tableau deja trié
+        int[] t = {1, 3, 5, 7, 9, 11, 13};
+
+        // cas ou la valeur est au milieu du tableau
+        assertEquals(3, SAé2.rechercheDicho(t, 7), "La valeur 7 se trouve à l'index 3.");
+
+        // cas ou la valeur est au milieu du tableau
+        assertEquals(0, SAé2.rechercheDicho(t, 1), "La valeur 1 (premier élément) doit être trouvée à l'index 0.");
+
+        // cas ou la valeur est a la fin du tableau
+        assertEquals(6, SAé2.rechercheDicho(t, 13), "La valeur 13 (dernier élément) doit être trouvée à l'index 6.");
+
+        // cas ou la valeur est absente (en desous de la plus petite valeur du tableau)
+        assertEquals(-1, SAé2.rechercheDicho(t, 0), "0 n'est pas present, la méthode doit retourner -1.");
+
+        // cas ou la valeur est absente (au dessus de la plus grande valeur du tableau)
+        assertEquals(-1, SAé2.rechercheDicho(t, 20), "20 n'est pas present , la méthode doit retourner -1.");
+
+        // cas ou le tableau comporte que un seul element
+        int[] unElement = {42};
+        assertEquals(0, SAé2.rechercheDicho(unElement, 42), "Doit trouver la valeur si elle est seule.");
+        assertEquals(-1, SAé2.rechercheDicho(unElement, 10), "Doit retourner -1 si la valeur seule n'est pas la bonne.");
+    }
 }
