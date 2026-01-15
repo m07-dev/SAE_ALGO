@@ -1,5 +1,3 @@
-// package janv2026;
-
 import java.util.Arrays;
 import java.util.Random;
 
@@ -20,7 +18,7 @@ public class SAé2 {
 
         // Arrays.sort(données); // trie le tableau en utilisant un algorithme de type Quicksort
 
-         // System.out.println(Arrays.toString(données));
+        // System.out.println(Arrays.toString(données));
     }
 
     /*
@@ -62,12 +60,16 @@ public class SAé2 {
     }
     // fonction qui retourne un tableau a l'envers
     public static int[] aLenvers(int[] t) {
-        for (int i = 0; i < t.length; i++) {
-            t[i] = t[t.length - i - 1];
+        int n = t.length;
+        for (int i = 0; i < n / 2; i++) {
+            int temp = t[i];
+            t[i] = t[n - i - 1];
+            t[n - i - 1] = temp;
         }
         return t;
     }
-
+     /*Recherche dans un tableau de int de longueur > 0 la valeur la plus proche d’une valeur donnée (si deux
+    valeurs sont à égale distance de la valeur cherchée, on prend la plus grande).*/
     public static int plusProcheVal(int[] t, int val) {
         int proche = t[0];
         for (int i = 0; i < t.length; i++) {
@@ -90,17 +92,17 @@ public class SAé2 {
         int indFin = t.length - 1;
         // On boucle tant que la zone de recherche est valide
         while (indDebut <= indFin) {
-            // 1. On calcule le milieu DANS la boucle
+            // On calcule le milieu DANS la boucle
             int indMoyen = (indDebut + indFin) / 2;
             // 2. Si on trouve la valeur, on retourne l'index immédiatement
             if (t[indMoyen] == val) {
                 return indMoyen;
             }
-            // 3. Si la valeur cherchée est plus grande, on regarde la moitié droite
+            // Si la valeur cherchée est plus grande, on regarde la moitié droite
             else if (val > t[indMoyen]) {
                 indDebut = indMoyen + 1;
             }
-            // 4. Sinon, on regarde la moitié gauche
+            // Sinon, on regarde la moitié gauche
             else {
                 indFin = indMoyen - 1;
             }
@@ -108,28 +110,28 @@ public class SAé2 {
         // Si on sort de la boucle, c'est que la valeur n'est pas dans le tableau
         return -1;
     }
-
+    /* recherche par dichotomie de la plus proche valeur d’une valeur de type int dans un tableau de
+    int.*/
     public static int rechercheDichoPlusProche(int[] t, int val) {
         if (t == null || t.length == 0) return 0;
         int indDebut = 0;
         int indFin = t.length - 1;
-        // On initialise le plus proche avec la première case (ou n'importe laquelle).
+        // On initialise le plus proche avec la première case
         int plusProche = t[0];
         while (indDebut <= indFin) {
             int indMoyen = (indDebut + indFin) / 2;
             int valMoyen = t[indMoyen];
-            // --- A. Logique de comparaison (inspirée de votre fonction linéaire) ---
-            // Si on tombe pile sur la valeur, c'est forcément la plus proche (distance 0)
+            // Si on tombe sur la valeur, c'est la plus proche
             if (valMoyen == val) {
                 return valMoyen;
             }
             int distActuelle = Math.abs(valMoyen - val);
             int distMeilleure = Math.abs(plusProche - val);
-            // Si la valeur du milieu est plus proche que notre meilleur candidat actuel
+            // Si la valeur du milieu est plus proche que l'actuelle
             if (distActuelle < distMeilleure) {
                 plusProche = valMoyen;
             }
-            // Gestion de l'égalité (ex: val=5, on a 4 et 6). Votre code préférait la valeur supérieure.
+            // si egalité
             else if (distActuelle == distMeilleure) {
                 if (valMoyen > plusProche) {
                     plusProche = valMoyen;
