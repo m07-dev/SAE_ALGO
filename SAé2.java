@@ -86,7 +86,7 @@ public class SAé2 {
         }
         return proche;
     }
-
+    // Cette fonction recherche l'indice d'une valeur dans un tableau trié par dichotomie et retourne -1 si la valeur n'est pas trouvée
     public static int rechercheDicho(int[] t, int val) {
         int indDebut = 0;
         int indFin = t.length - 1;
